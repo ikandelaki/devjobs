@@ -1,0 +1,7 @@
+devjobs.search_form:
+  path: "/jobs"
+  defaults:
+    _form: '\Drupal\devjobs\FormController\FormController'
+    _title: "Search Form"
+  requirements:
+    _permission: "access content"

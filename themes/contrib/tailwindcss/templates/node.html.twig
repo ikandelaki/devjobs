@@ -1,0 +1,188 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ *
+ */
+#}
+<article{{ attributes }}>
+    <div class="relative bg-lightgray dark:bg-darkblack">
+      <div class="max-w-full">
+        <img
+          src="http://drupal.docker.localhost:8000/themes/contrib/tailwindcss/images/home-bg--small.png"
+          class="w-full h-32 md:hidden"
+        />
+        <img
+          src="http://drupal.docker.localhost:8000/themes/contrib/tailwindcss/images/home-bg--medium.png"
+          class="hidden md:block md:w-full md:h-40 lg:hidden"
+        />
+        <img
+          src="http://drupal.docker.localhost:8000/themes/contrib/tailwindcss/images/home-bg--large.png"
+          class="hidden lg:block lg:w-full lg:h-40"
+        />
+      </div>
+      <div
+        class="absolute top-0 left-0 right-0 bottom-0 mt-8 px-6 h-8 max-w-screen-lg mx-auto flex justify-between md:mt-10"
+      >
+        <div>
+          <a href="/jobs"><span class="text-white font-bold text-3xl md:text-4xl">devjobs</span></a>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex items-center">
+            <img src="http://drupal.docker.localhost:8000/themes/contrib/tailwindcss/images/sun.png" />
+          </div>
+          <div class="flex items-center">
+            <div class="theme-switcher cursor-pointer h-6 w-12 bg-white rounded-full flex items-center">
+              <div class="theme-switcher--circle rounded-full bg-lightblue h-4 w-4 mx-1 transition-all duration-300"></div>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <img src="http://drupal.docker.localhost:8000/themes/contrib/tailwindcss/images/moon.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="relative bg-lightgray dark:bg-darkblack px-6 font-kumbh-sans">
+    <div class="absolute top-0 left-2/4 -translate-x-2/4 -translate-y-2 bg-lightgray dark:bg-darkblack md:-mt-4">
+      <div class="relative rounded-md bg-white dark:bg-darkblue mx-6 md:flex md:items-center md:mx-10 lg:mx-auto lg:max-w-screen-lg">
+        <div class="absolute top-0 left-2/4 -translate-y-2/4 -translate-x-2/4 md:hidden">
+          {{ content.field_card_image }}
+        </div>
+          <div class="hidden md:block w-36 h-36">
+            {{ content.field_card_image }}
+          </div>
+          <div class="flex flex-col gap-4 items-center justify-center mx-32 md:mx-0">
+            <h3 class="font-bold text-xl mt-12 md:mt-0 dark:text-white">{{ content.field_company_name }}</h3>
+            <span class="text-bluegray font-normal text-base flex text-lightblack dark:text-bluegray">{{ content.field_company_name }}.com</span>
+          </div>
+          <div class="mt-7 md:mt-0 rounded-md flex items-center justify-center pb-8 md:pb-0 md:ml-auto md:mr-10">
+            <a href="#" class="py-4 px-5 text-lightblue font-bold bg-lightgray dark:text-white dark:bg-bluegray rounded-sm mx-auto">Company Site</a>
+          </div>
+      </div>
+      <div class="bg-lightgray dark:bg-darkblack h-6"></div>
+      <div class="md:flex items-center bg-white dark:bg-darkblue md:mx-10 md:pb-11 mx-6 lg:mx-auto lg:max-w-screen-lg">
+        <div class="flex flex-col gap-3 mx-6 pt-10 px-6 md:px-12 md:mx-0 rounded-t-md bg-white dark:bg-darkblue">
+          <div class="flex items-center gap-3">
+            <span class="text-bluegray">{{ content.field_time_ago }}</span>
+            <div class="w-1 h-1 rounded-full bg-bluegray"></div>
+            <span class="text-bluegray">{{ content.field_job_type }}</span>
+          </div>
+          <div class="font-bold text-xl text-lightblack dark:text-white">
+            {{ content.field_job_title }}
+          </div>
+          <div class="text-lightblue text-sm font-bold">
+            {{ content.field_country }}
+          </div>
+        </div>
+        <div class="hidden mx-6 pt-16 pb-8 px-6 bg-white dark:bg-darkblue md:inline-flex md:ml-auto md:px-0">
+          <a href="#" class="block box-border w-full px-6 py-4 mx-auto bg-lightblue text-white font-bold text-center rounded-sm">Apply Now</a>
+        </div>
+      </div>
+      <div class="mx-6 pt-16 pb-8 px-6 bg-white dark:bg-darkblue md:hidden">
+        <a href="#" class="block box-border w-full px-6 py-4 mx-auto bg-lightblue text-white font-bold text-center rounded-sm">Apply Now</a>
+      </div>
+      <div class="w-screen px-6 bg-lightgray dark:bg-darkblack md:px-10">
+        <div class="text-bluegray px-6 pb-12 md:px-12 text-base leading-7 bg-white dark:bg-darkblue lg:mx-auto lg:max-w-screen-lg">
+          <p>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.
+          </p>
+          <h3 class="mt-10 mb-7 font-bold text-lightblack text-xl dark:text-white">Requirements</h3>
+          <p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus, vitae facilisis libero dolor a purus. Sed vel lacus. Mauris nibh felis, adipiscing varius, adipiscing in, lacinia vel, tellus. Suspendisse ac urna. Etiam pellentesque mauris ut lectus. Nunc tellus ante, mattis eget, gravida vitae, ultricies ac, leo. Integer leo pede, ornare a, lacinia eu, vulputate vel, nisl.</p>
+          <ul class="list-disc marker:text-lightblue list-inside mt-8">
+            <li>Morbi interdum mollis sapien. Sed</li>
+            <li>Phasellus lacinia magna a ullamcorper laoreet, lectus arcu pulvinar risus</li>
+            <li>Mauris nibh felis, adipiscing varius, adipiscing in, lacinia vel, tellus. Suspendisse ac urna. Etiam pellentesque mauris ut lectus.</li>
+            <li>Morbi interdum mollis sapien. Sed</li>
+          </ul>
+          <h3 class="mt-10 mb-7 font-bold text-lightblack text-xl dark:text-white">What You Will Do</h3>
+          <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
+          <ol class="list-decimal marker:text-lightblue list-inside">
+            <li>Morbi interdum mollis sapien. Sed</li>
+            <li>Phasellus lacinia magna a ullamcorper laoreet, lectus arcu pulvinar risus</li>
+            <li>Mauris nibh felis, adipiscing varius, adipiscing in, lacinia vel, tellus. Suspendisse ac urna. Etiam pellentesque mauris ut lectus.</li>
+            <li>Morbi interdum mollis sapien. Sed</li>
+          </ol>
+        </div>
+      </div>
+      <div class="h-16 bg-lightgray dark:bg-darkblack"></div>
+      <div class="px-6 py-6 bg-white dark:bg-darkblue md:hidden">
+        <a href="#" class="block box-border w-full px-8 py-4 mx-auto bg-lightblue text-white font-bold text-center rounded-sm">Apply Now</a>
+      </div>
+      <div class="w-full bg-white dark:bg-darkblue">
+        <div class="hidden md:flex bg-white dark:bg-darkblue px-10 py-6 font-kumbh-sans lg:mx-auto lg:max-w-screen-lg">
+          <div class="flex flex-col gap-3">
+            <span class="font-bold text-xl text-lightblack dark:text-white">{{ content.field_job_title }}</span>
+            <span class="text-bluegray dark:text-bluegray">{{ content.field_company_name }}</span>
+          </div>
+          <div class="ml-auto">
+            <a href="#" class="block box-border w-full px-8 py-4 mx-auto bg-lightblue text-white font-bold text-center rounded-sm">Apply Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</article>
